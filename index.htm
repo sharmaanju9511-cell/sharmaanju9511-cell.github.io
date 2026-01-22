@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anju Sharma - Python Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #050b18;
+      --card: rgba(15, 25, 55, 0.75);
+      --text: #e9ecf5;
+      --muted: #9aa4c7;
+      --accent: #4f8cff;
+      --glow: rgba(79,140,255,0.6);
+      --button-bg: #0e162b;
+      --button-hover: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      cursor: none; /* custom cursor */
+    }
+
+    body {
+      font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(600px 300px at 20% 0%, rgba(79,140,255,0.15), transparent 60%),
+        radial-gradient(500px 300px at 90% 10%, rgba(120,180,255,0.12), transparent 60%),
+        linear-gradient(180deg, #050b18, #02040a);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      position: relative;
+      display: inline-block;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 28px;
+    }
+
+    section {
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
+      padding: 36px;
+      margin-bottom: 32px;
+      border: 1px solid rgba(79,140,255,0.25);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.02),
+        0 20px 60px rgba(0,0,0,0.6),
+        inset 0 0 30px rgba(79,140,255,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 25px 70px rgba(0,0,0,0.7),
+        inset 0 0 35px rgba(79,140,255,0.12);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 80px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(
+        from 0deg,
+        transparent,
+        rgba(79,140,255,0.25),
+        transparent 30%
+      );
+      animation: spin 14s linear infinite;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 18px var(--glow);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--muted);
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-bottom: 18px;
+      text-shadow: 0 0 10px rgba(79,140,255,0.35);
+    }
+
+    .about p {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+    }
+
+    .skill {
+      padding: 20px;
+      text-align: center;
+      border-radius: 16px;
+      background:
+        linear-gradient(145deg, rgba(79,140,255,0.18), rgba(0,0,0,0.4));
+      box-shadow:
+        inset 0 0 25px rgba(79,140,255,0.15),
+        0 10px 30px rgba(0,0,0,0.6);
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 0 30px rgba(79,140,255,0.45),
+        0 18px 40px rgba(0,0,0,0.7);
+    }
+
+    .skill span {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 22px;
+    }
+
+    .project {
+      border-radius: 20px;
+      padding: 24px;
+      background:
+        linear-gradient(160deg, rgba(79,140,255,0.22), rgba(10,15,35,0.85));
+      box-shadow:
+        inset 0 0 30px rgba(79,140,255,0.12),
+        0 15px 45px rgba(0,0,0,0.7);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .project:hover {
+      transform: perspective(800px) rotateX(6deg) translateY(-8px);
+      box-shadow:
+        0 0 40px rgba(79,140,255,0.6),
+        0 18px 50px rgba(0,0,0,0.8);
+    }
+
+    .project h3 {
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+      text-shadow: 0 0 10px rgba(79,140,255,0.4);
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .contact-item {
+      padding: 22px;
+      border-radius: 18px;
+      background:
+        linear-gradient(140deg, rgba(79,140,255,0.2), rgba(0,0,0,0.6));
+      box-shadow:
+        inset 0 0 25px rgba(79,140,255,0.15),
+        0 12px 35px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-4px);
+      background: linear-gradient(140deg, rgba(79,140,255,0.35), rgba(0,0,0,0.7));
+      box-shadow:
+        0 0 35px rgba(79,140,255,0.45),
+        0 15px 45px rgba(0,0,0,0.75);
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 8px;
+      letter-spacing: 0.4px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      padding: 24px 0 40px;
+      opacity: 0.8;
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.15s ease, height 0.15s ease, background 0.15s ease, border 0.15s ease;
+      z-index: 9999;
+      mix-blend-mode: difference;
+    }
+
+    a:hover ~ .cursor,
+    .skill:hover ~ .cursor,
+    .project:hover ~ .cursor,
+    .contact-item:hover ~ .cursor {
+      width: 36px;
+      height: 36px;
+      background: var(--accent);
+      border: none;
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 26px 22px; }
+      .hero { padding: 64px 22px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Anju Sharma</h1>
+        <p>Python Developer | Automation | Web Scripts | Freelance Projects</p>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>About Me</h2>
+      <p>
+      Hello! I am a passionate Python developer specializing in automation, web scraping,
+    and freelance projects. I focus on building practical Python solutions that
+    save time, improve workflows, and deliver value to clients
+      </p>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill"><span>Python</span></div>
+        <div class="skill"><span>Automation</span></div>
+        <div class="skill"><span>Web Scraping</span></div>
+        <div class="skill"><span>HTML & CSS Basics</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="projects-grid">
+        <div class="project">
+          <h3>File Organizer</h3>
+          <p>A Python script that automatically sorts files into folders by type, making directories organized.</p>
+        </div>
+
+        <div class="project">
+          <h3>Excel Automation Script</h3>
+          <p>Python script to read, update, and generate Excel reports automatically for small businesses.</p>
+        </div>
+
+        <div class="project">
+          <h3>Website Data Scraper</h3>
+          <p>Scrapes structured data from websites and stores it in CSV/Excel format for analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-list">
+        <div class="contact-item">
+          <strong>GitHub</strong>
+          <a href="https://https://github.com/sharmaanju9511-cell/sharmaanju9511-cell.github.io" target="_blank">github.com/Anju Sharma</a>
+        </div>
+
+        <div class="contact-item">
+          <strong>Email</strong>
+          <span>sharmaanju9511@gmail.com</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 · Anju Sharma · Python Developer
+    </footer>
+
+  </div>
+
+  <div class="cursor"></div>
+
+  <script>
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+  </script>
+
+</body>
+</html>
